@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+//注释均为测试代码
 public class BattleMgr : MonoBehaviour
 {
 	private Entity _playerEntity; // 逻辑数据
@@ -12,10 +12,11 @@ public class BattleMgr : MonoBehaviour
 	{
 		StateMgr.Instance.OnStateChanged += HandleStateChanged;
 		StateMgr.Instance.SwithchState(new SetupState());
-
-		_playerEntity = SpawnMonster(obj, new Vector3(0, 0, 0));
-		// 测试一下：扣 10 点血，看看 Console 有没有打印
-		_playerEntity.TakeDamage(10);
+		
+		//以下为测试代码
+		//_playerEntity = SpawnMonster(obj, new Vector3(0, 0, 0));
+		//CardMgr.Instance.Init();
+		//CardMgr.Instance.PlayCard(_playerEntity, CardMgr.Instance.handPile[0]);
 	}
 
 	void Update()
@@ -29,7 +30,7 @@ public class BattleMgr : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 			StateMgr.Instance.SwithchState(new EnemyTurnState());
 
-		_view.UpdateHealthBar(_playerEntity.hp,_playerEntity.maxHp);
+		//_view.UpdateHealthBar(_playerEntity.hp, _playerEntity.maxHp);
 	}
 	void OnDestroy() { 
 		StateMgr.Instance.OnStateChanged -= HandleStateChanged;
