@@ -3,13 +3,6 @@
 public class EntityView : MonoBehaviour
 {
 	private Entity _entity; // 用来存储被绑定的实体
-	private void Start()
-	{
-	}
-	private void Update()
-	{
-		UpdateHealthBar(_entity.hp, _entity.maxHp);
-	}
 	public void Bind(Entity entity)
 	{
 		// 1. 如果之前有绑定的，先解绑
@@ -22,7 +15,6 @@ public class EntityView : MonoBehaviour
 		if (_entity != null)
 		{
 			_entity.OnHpChanged += UpdateHealthBar;
-			UpdateHealthBar(_entity.hp, _entity.maxHp);
 		}
 	}
 

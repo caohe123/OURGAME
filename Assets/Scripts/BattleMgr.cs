@@ -13,18 +13,7 @@ public class BattleMgr : MonoBehaviour
 		StateMgr.Instance.OnStateChanged += HandleStateChanged;
 		StateMgr.Instance.SwithchState(new SetupState());
 
-		// 1. 获取同物体上的 EntityView 组件
-		_view = GetComponent<EntityView>();
-
-		// 2. 手动 new 一个实体（赋予灵魂）
-		_playerEntity = new Entity(100, "Hero");
-
-		// 3. 执行绑定：把数据塞给组件
-		if (_view != null)
-		{
-			_view.Bind(_playerEntity);
-		}
-
+		_playerEntity = SpawnMonster(obj, new Vector3(0, 0, 0));
 		// 测试一下：扣 10 点血，看看 Console 有没有打印
 		_playerEntity.TakeDamage(10);
 	}
@@ -39,6 +28,8 @@ public class BattleMgr : MonoBehaviour
 			StateMgr.Instance.SwithchState(new PlayerTurnState());
 		if (Input.GetKeyDown(KeyCode.Space))
 			StateMgr.Instance.SwithchState(new EnemyTurnState());
+
+		_view.UpdateHealthBar(_playerEntity.hp,_playerEntity.maxHp);
 	}
 	void OnDestroy() { 
 		StateMgr.Instance.OnStateChanged -= HandleStateChanged;
@@ -48,16 +39,29 @@ public class BattleMgr : MonoBehaviour
 		Debug.Log("State changed to " + state.GetType().Name);
 	}
 	//绑定预制体逻辑，直接在编辑器中拖动即可
-	//public void SpawnMonster(GameObject prefab, Vector3 position)
-	//{
-	//	// 1. 创建逻辑对象 (纯 C#)
-	//	Entity logic = new Entity(50,"player");
+	public Entity SpawnMonster(GameObject prefab, Vector3 position)
+	{
+		// 1. 创建逻辑对象 (纯 C#)
+		Entity logic = new Entity(50, "player");
 
-	//	// 2. 创建表现对象 (Unity GameObject)
-	//	GameObject go = Object.Instantiate(prefab, position, Quaternion.identity);
+		// 2. 创建表现对象 (Unity GameObject)
+		GameObject go = Object.Instantiate(prefab, position, Quaternion.identity);
 
-	//	// 3. 关联两者
-	//	EntityView view = go.GetComponent<EntityView>();
-	//	view.Bind(logic);
-	//}
+
+		// 3. 关联两者
+		_view = go.GetComponent<EntityView>();
+
+		if (_view != null)
+		{
+			_view.Bind(logic);
+		}
+		else
+		{
+			Debug.LogError("预制体上缺少 EntityView 组件！");
+		}
+
+		_view.Bind(logic);
+
+		return logic;
+	}
 }
