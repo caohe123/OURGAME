@@ -1,18 +1,29 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMgr : MonoBehaviour
+public class StateMgr
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	private static StateMgr _instance;
+	public static StateMgr Instance {
+		get {
+			return _instance?? (_instance = new StateMgr());
+		}
+	}
+	//目前的状态
+	private BaseState _currentState;
+	//当状态改变时通知外部
+	public event Action<BaseState> OnStateChanged;
+	
+	public void Tick() { 
+		_currentState?.Update();
+	}
+	public void SwithchState(BaseState newState) {
+		_currentState?.Exit();
+		_currentState = newState;
+		_currentState?.Enter();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		OnStateChanged?.Invoke(_currentState);
+	}
 }
