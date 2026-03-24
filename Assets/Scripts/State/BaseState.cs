@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseState
 {
-   // protected StateMgr owner;
+    // protected StateMgr owner;
     //internal protected BaseState(StateMgr mgr) => owner = mgr;
 	private enum State
 	{

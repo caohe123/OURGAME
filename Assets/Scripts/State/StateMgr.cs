@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMgr
+public class StateMgr//状态管理器
 {
 	private static StateMgr _instance;
 	public static StateMgr Instance {
@@ -19,6 +19,7 @@ public class StateMgr
 	public void Tick() { 
 		_currentState?.Update();
 	}
+	//改变状态时分别执行退出逻辑和加载逻辑
 	public void SwithchState(BaseState newState) {
 		_currentState?.Exit();
 		_currentState = newState;
