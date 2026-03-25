@@ -28,8 +28,8 @@ public class CardMgr
 		{
 			_allCards.Add(card.cardName, card);
 		}
-		drawPile.Add(assets[0]);
-		handPile.Add(assets[0]);
+		//drawPile.Add(assets[0]);
+		//handPile.Add(assets[0]);
 	}
 	//Fisher-Yates Shuffles洗牌算法
 	public void Shuffle() {
@@ -43,13 +43,13 @@ public class CardMgr
 			drawPile[n] = value;
 		}
 	}
-	//使用EffectsEntry整合value和effect，并执行effect
+	//出牌，需要实体接受也需要牌
 	public void PlayCard(Entity entity,CardData card)
 	{
 		for (int i = 0; i < card.effectsEntries.Count; i++) {
 			card.effectsEntries[i].effect.Execute(entity,card.effectsEntries[i].value);
 		}
-		discardPile.Add(card);
-		handPile.Remove(card);
+		//discardPile.Add(card);
+		//handPile.Remove(card);
 	}
 }

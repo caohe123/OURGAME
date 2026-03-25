@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//使用EffectsEntry整合value和effect，并执行effect
 [System.Serializable]
 public class EffectEntry
 {
@@ -17,7 +17,7 @@ public class CardData : ScriptableObject {
 	public int cost;
 	public Sprite cardArt;
 	[TextArea]public string textArea;
-	// 关键：SerializeReference 允许在 Inspector 序列化抽象类的子类实例
+
 	[Header("Card State")]
 
 	public List<EffectEntry> effectsEntries = new List<EffectEntry>();

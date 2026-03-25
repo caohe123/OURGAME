@@ -21,14 +21,15 @@ public class BattleMgr : MonoBehaviour
 
 	void Update()
 	{
-		//StateMgr.Instance.Tick();  
+		StateMgr.Instance.Tick();  
+
 		//切换回合逻辑
-		if(Input.GetMouseButtonDown(0))
-			StateMgr.Instance.SwithchState(new PlayerDrawState());
-		if(Input.GetMouseButtonDown(1))
-			StateMgr.Instance.SwithchState(new PlayerTurnState());
-		if (Input.GetKeyDown(KeyCode.Space))
-			StateMgr.Instance.SwithchState(new EnemyTurnState());
+		//if(Input.GetMouseButtonDown(0))
+		//	StateMgr.Instance.SwithchState(new PlayerDrawState());
+		//if(Input.GetMouseButtonDown(1))
+		//	StateMgr.Instance.SwithchState(new PlayerTurnState());
+		//if (Input.GetKeyDown(KeyCode.Space))
+		//	StateMgr.Instance.SwithchState(new EnemyTurnState());
 
 		//_view.UpdateHealthBar(_playerEntity.hp, _playerEntity.maxHp);
 	}

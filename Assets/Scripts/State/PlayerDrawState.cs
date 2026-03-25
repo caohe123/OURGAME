@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerDrawState : BaseState
 {
-	//public PlayerDrawState(StateMgr mgr) : base(mgr) { }
 	internal protected override void Enter()
 	{
 		Debug.Log("Entering PlayerDrawState");

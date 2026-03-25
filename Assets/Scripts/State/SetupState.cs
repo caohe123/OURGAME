@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SetupState : BaseState
 {
-	//public SetupState(StateMgr mgr) : base(mgr) { }
 	internal protected override void Enter()
 	{
+		CardMgr.Instance.Init(); 
 		Debug.Log("Entering SetupState");
 	}
 
