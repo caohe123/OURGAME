@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class BaseState
 {
+	protected StateMgr owner;
+	public BaseState(StateMgr owner) => this.owner = owner;
 	private enum State
 	{
 		SetupState = 0,

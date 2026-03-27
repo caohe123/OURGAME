@@ -5,16 +5,26 @@ using UnityEngine;
 //注释均为测试代码
 public class BattleMgr : MonoBehaviour
 {
+	private static BattleMgr _instance;
+	public static BattleMgr Instance {
+		get {return _instance?_instance:_instance=FindObjectOfType<BattleMgr>(); }
+	}
 	private Entity _playerEntity; // 逻辑数据
+	public Entity PlayerEntity => _playerEntity; // 只读访问
+
+	private List<Entity> _enemy = new List<Entity>(); // 逻辑数据
+	public List<Entity> Enemy => _enemy;
+
 	private EntityView _view;     // 表现组件
 	public GameObject obj;//预制体！为空则不实例化！
 	void Start()
 	{
 		StateMgr.Instance.OnStateChanged += HandleStateChanged;
-		StateMgr.Instance.SwithchState(new SetupState());
-		
+		StateMgr.Instance.Init(this);
+		StateMgr.Instance.SwitchState(new SetupState(StateMgr.Instance));
+
 		//以下为测试代码
-		//_playerEntity = SpawnMonster(obj, new Vector3(0, 0, 0));
+		_playerEntity = SpawnMonster(obj, new Vector3(0, 0, 0));
 		//CardMgr.Instance.Init();
 		//CardMgr.Instance.PlayCard(_playerEntity, CardMgr.Instance.handPile[0]);
 	}
@@ -61,8 +71,6 @@ public class BattleMgr : MonoBehaviour
 		{
 			Debug.LogError("预制体上缺少 EntityView 组件！");
 		}
-
-		_view.Bind(logic);
 
 		return logic;
 	}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTurnState : BaseState
 {
-	//public EnemyTurnState(StateMgr mgr) : base(mgr) { }
+	public EnemyTurnState(StateMgr mgr) : base(mgr) { }
 	internal protected override void Enter()
 	{
 		Debug.Log("Entering EnemyTurnState");

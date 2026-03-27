@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerTurnState : BaseState
 {
+	public PlayerTurnState(StateMgr mgr) : base(mgr) { }
 	internal protected override void Enter()
 	{
+
 		Debug.Log("Entering PlayerTurnState");
 	}
 

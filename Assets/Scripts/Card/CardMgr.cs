@@ -17,6 +17,7 @@ public class CardMgr
 
 	public void Init()
 	{
+		_allCards.Clear();
 		// 实际开发中建议使用 Addressables 或 Resources.LoadAll 加载
 		CardData[] assets = Resources.LoadAll<CardData>("CardGame/CardData");
 		if (assets == null || assets.Length == 0)
@@ -51,5 +52,5 @@ public class CardMgr
 		}
 		//discardPile.Add(card);
 		//handPile.Remove(card);
-	}
+	}	
 }
