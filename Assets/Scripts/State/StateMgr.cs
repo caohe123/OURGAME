@@ -8,7 +8,7 @@ public class StateMgr//状态管理器
 	private static StateMgr _instance;
 	public static StateMgr Instance {
 		get {
-			return _instance?? (_instance = new StateMgr());
+			return _instance?? (_instance = new StateMgr());//未绑定MonoBehaviour时返回null
 		}
 	}
 	private MonoBehaviour _driver;

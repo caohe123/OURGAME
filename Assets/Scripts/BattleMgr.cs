@@ -31,7 +31,7 @@ public class BattleMgr : MonoBehaviour
 
 	void Update()
 	{
-		StateMgr.Instance.Tick();  
+		//StateMgr.Instance.Tick();  
 
 		//切换回合逻辑
 		//if(Input.GetMouseButtonDown(0))
@@ -48,7 +48,7 @@ public class BattleMgr : MonoBehaviour
 	}
 
 	private void HandleStateChanged(BaseState state) {
-		Debug.Log("State changed to " + state.GetType().Name);
+		Debug.Log("Already changed to " + state.GetType().Name);
 	}
 	//绑定预制体逻辑，直接在编辑器中拖动即可
 	public Entity SpawnMonster(GameObject prefab, Vector3 position)

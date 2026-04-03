@@ -6,14 +6,6 @@ public abstract class BaseState
 {
 	protected StateMgr owner;
 	public BaseState(StateMgr owner) => this.owner = owner;
-	private enum State
-	{
-		SetupState = 0,
-		PauseState,
-		PlayerDrawState,
-		PlayerTurnState,
-		EnemyTuenState
-	};
 	internal protected virtual void Enter() {
         Debug.Log("Entering BaseState");
     }

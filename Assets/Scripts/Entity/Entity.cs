@@ -8,6 +8,7 @@ public class Entity
     public int hp;
     public int maxHp;
     public int shield;//护盾
+    public int drawCount;
     public string entityName;
 
     public Action<int, int> OnHpChanged;
@@ -16,6 +17,7 @@ public class Entity
         this.hp = maxHp;
         this.maxHp = maxHp;
         this.shield = 0;
+        this.drawCount = 5;
         this.entityName = entityName;
     }
 
@@ -42,5 +44,9 @@ public class Entity
         if (damage > 0) { 
             ApplyHpChange(-damage);
         }
+    }
+
+    public int GetFinalDarwCount() {
+        return drawCount;
     }
 }

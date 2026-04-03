@@ -29,28 +29,53 @@ public class CardMgr
 		{
 			_allCards.Add(card.cardName, card);
 		}
-		//drawPile.Add(assets[0]);
-		//handPile.Add(assets[0]);
+
+		drawPile.Clear();
+		foreach(var card in _allCards.Values) {
+			drawPile.Add(card);
+		}
+		handPile.Clear();
+		Shuffle(drawPile);
+		//==========================
 	}
 	//Fisher-Yates Shuffles洗牌算法
-	public void Shuffle() {
-		int n = drawPile.Count;
+	public void Shuffle(List<CardData> pile) {
+		int n = pile.Count;
 		while (n > 1)
 		{
 			n--;
 			int k = UnityEngine.Random.Range(0, n + 1);
-			CardData value = drawPile[k];
-			drawPile[k] = drawPile[n];
-			drawPile[n] = value;
+			CardData value = pile[k];
+			pile[k] = pile[n];
+			pile[n] = value;
 		}
 	}
+
+	public CardData DrawCard() {
+		if (drawPile.Count == 0)
+		{
+			if (discardPile.Count == 0) return null; // 彻底没牌了
+
+			// 将弃牌堆移入抽牌堆并只洗一次牌
+			drawPile.AddRange(discardPile);
+			discardPile.Clear();
+			Shuffle(drawPile);
+		}
+
+		// 直接取最后一张（效率最高，不需要移动数组元素）
+		CardData re = drawPile[drawPile.Count - 1];
+		drawPile.RemoveAt(drawPile.Count - 1);
+		handPile.Add(re); // 记得同步更新手牌列表
+		return re;
+	}
+
 	//出牌，需要实体接受也需要牌
 	public void PlayCard(Entity entity,CardData card)
 	{
 		for (int i = 0; i < card.effectsEntries.Count; i++) {
 			card.effectsEntries[i].effect.Execute(entity,card.effectsEntries[i].value);
 		}
-		//discardPile.Add(card);
-		//handPile.Remove(card);
+		handPile.Remove(card);
+		discardPile.Add(card);
 	}	
 }
