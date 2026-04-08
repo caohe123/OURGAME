@@ -29,11 +29,15 @@ public class PlayerDrawState : BaseState
 				// 表现层触发：抛出事件让 UI 播放“发牌动画”
 				// 你可以传入卡牌数据，让 UI 生成对应的卡牌物体
 				//GameEvents.OnCardDrawnUI?.Invoke(drawnCard);
+
+				//加入可视化的卡牌
 				HandMgr.Instance.AddCardToHandUI(drawnCard);
+				//把卡牌移动到预加载位置
+				HandMgr.Instance.RefreshLayout(cardMgr.handPile.Count);
 			}
 
 			// 炫技点：控制发牌节奏，每张牌间隔 0.15s
-			yield return new WaitForSeconds(0.15f);
+			yield return new WaitForSeconds(0.1f);
 		}
 
 		// 4. 切换契机：所有牌发完后，进入玩家操作回合

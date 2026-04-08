@@ -7,7 +7,10 @@ public class BattleMgr : MonoBehaviour
 {
 	private static BattleMgr _instance;
 	public static BattleMgr Instance {
-		get {return _instance?_instance:_instance=FindObjectOfType<BattleMgr>(); }
+		get {
+			return _instance?_instance:_instance=FindObjectOfType<BattleMgr>(); 
+		
+		}
 	}
 	private Entity _playerEntity; // 逻辑数据
 	public Entity PlayerEntity => _playerEntity; // 只读访问

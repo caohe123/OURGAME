@@ -25,7 +25,7 @@ public class SetupState : BaseState
 		//GameEvents.OnBattleStartLoading?.Invoke();
 
 		// 3. 真正的“加载等待”
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(0.1f);
 
 		// 4. 切换契机：加载完成，直接进入下一环节
 		owner.SwitchState(new PlayerDrawState(owner));
